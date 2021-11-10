@@ -1,32 +1,26 @@
 import { Center, DepthBuffer, SpotLight, useGLTF } from "@react-three/drei";
-import {
-  Canvas,
-  GroupProps,
-  ThreeEvent,
-  useFrame,
-  useLoader,
-  useThree,
-} from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import React, { Suspense, useRef, useState } from "react";
 import { Vector3, SpotLight as SpotLightImpl, Group } from "three";
-import { GLTF, GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 
+//todo SpotLight ref type
+
+// 불러오는 gltf 파일에 따라서 구성됨
 type GLTFResult = GLTF & {
   nodes: {
-    cube1: THREE.Mesh;
-    cube2: THREE.Mesh;
+    dragon: THREE.Mesh;
   };
   materials: {
-    base: THREE.MeshStandardMaterial;
-    inner: THREE.MeshStandardMaterial;
+    "Default OBJ.001": THREE.MeshStandardMaterial;
   };
 };
 
 function Dragon({ ...props }) {
-  //@ts-ignore
   const { nodes, materials } = useGLTF(
     "https://market-assets.fra1.cdn.digitaloceanspaces.com/market-assets/models/dragon/model.gltf"
-  );
+  ) as unknown as GLTFResult;
+
   return (
     <mesh
       castShadow
@@ -44,12 +38,6 @@ const vec = new Vector3();
 function MovingSpot({ ...props }) {
   const group = useRef<Group>();
   const [light, set] = useState<SpotLightImpl>();
-  console.log(
-    light,
-    typeof light
-
-    // instanceof light
-  );
   const viewport = useThree((state) => state.viewport);
   useFrame((state) => {
     group?.current?.position?.lerp(
