@@ -80,7 +80,7 @@ function App() {
         enablePan={false}
         enableDamping
         dampingFactor={0.2}
-        // autoRotate
+        autoRotate
         rotateSpeed={-0.5}
       />
       <Suspense fallback={null}>

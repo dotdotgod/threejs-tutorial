@@ -43,7 +43,7 @@ const Model = () => {
     if (group.current) group.current.rotation.y += 0.003;
   });
   return (
-    <group ref={group} scale={[0.001, 0.001, 0.001]} position={[0, 0, -100]}>
+    <group ref={group} scale={[0.0004, 0.0004, 0.0004]} position={[0, 0, -100]}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <group position={[-102253.52, -210688.86, -17050.52]}>
           <mesh
@@ -58,18 +58,18 @@ const Model = () => {
             material={materials.Scene_Root}
             geometry={nodes.mesh_2.geometry}
           />
-          <mesh
+          {/* <mesh
             material={materials.Scene_Root}
             geometry={nodes.mesh_3.geometry}
-          />
+          /> */}
         </group>
         <group position={[100000, 120000, 2000]}>
           <Sound url="/zapsplat_icecream.mp3" distance={10} />
         </group>
-        <mesh position={[250000, -200000, 50000]}>
+        {/* <mesh position={[250000, -200000, 50000]}>
           <sphereBufferGeometry attach="geometry" args={[30000, 32, 32]} />
           <meshBasicMaterial attach="material" color="#ff1020" />
-        </mesh>
+        </mesh> */}
       </group>
     </group>
   );
